@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+//ë‚´ê°€ ë†“ì³¤ë˜ ë¶€ë¶„
+//í–‰ì„ ì§€ ì¤‘ë³µì€ ê°€ëŠ¥í•˜ì§€ë§Œ í‹°ì¼“ ì¤‘ë³µì´ ìƒê¸°ëŠ”ê±¸ ê³ ë ¤ì•ˆí•¨
+//ëª¨ë“  ë„ì‹œë¥¼ ë°©ë¬¸í•  ìˆ˜ ìˆìœ¼ë¯€ë¡œ ë„ì‹œë¥¼ ë°©ë¬¸í•˜ëŠ” ê²½ë¡œë¥¼ êµ¬í•˜ê³  ì•ŒíŒŒë²³ ìˆœì„œë¡œ ì •ë ¬
+
 public class Algorithm_travlepath {
-static ArrayList<String> result = new ArrayList<String>(); //String Å¸ÀÔÀ» ¿ø¼Ò·Î °®´Â List
+static ArrayList<String> result = new ArrayList<String>(); //String íƒ€ì…ì„ ì›ì†Œë¡œ ê°–ëŠ” List
     
     public static void main(String[] args) {
     	String[][] tickets = {{"ICN", "SFO"}, {"ICN", "ATL"}, {"SFO", "ATL"}, {"ATL", "ICN"}, {"ATL","SFO"}};
@@ -14,15 +18,15 @@ static ArrayList<String> result = new ArrayList<String>(); //String Å¸ÀÔÀ» ¿ø¼Ò·
     }
     
     public String[] solution(String[][] tickets) {
-        //¹æ¹®°æ·Î¸¦ ÀúÀåÇÏ±âÀ§ÇÑ ¹è¿­
+        //ë°©ë¬¸ê²½ë¡œë¥¼ ì €ì¥í•˜ê¸°ìœ„í•œ ë°°ì—´
     Boolean[] visited = new Boolean[tickets.length];
 	Arrays.fill(visited, Boolean.FALSE);
-        //±íÀÌÅ½»ö ½ÃÀÛ
+        //ê¹Šì´íƒìƒ‰ ì‹œì‘
 	dfs(visited, "ICN", "", tickets, 0);
-        //¾ËÆÄºª¼ø¼­·Î °¡Àå ºü¸¥ °æ·Î¸¦ °¡Á®¿À±â À§ÇÑ Á¤·Ä
+        //ì•ŒíŒŒë²³ìˆœì„œë¡œ ê°€ì¥ ë¹ ë¥¸ ê²½ë¡œë¥¼ ê°€ì ¸ì˜¤ê¸° ìœ„í•œ ì •ë ¬
         Collections.sort(result);
         
-        String[] answer = result.get(0).split(","); //result¸¦ ¹è¿­·Î °¡Á®¿É´Ï´Ù
+        String[] answer = result.get(0).split(","); //resultë¥¼ ë°°ì—´ë¡œ ê°€ì ¸ì˜µë‹ˆë‹¤
         return answer;
     }
     
@@ -38,11 +42,11 @@ static ArrayList<String> result = new ArrayList<String>(); //String Å¸ÀÔÀ» ¿ø¼Ò·
 		}
 		
 		for(int i=0; i<tickets.length; i++) {
-                        //»ç¿ëÇÏÁö ¾ÊÀº Æ¼ÄÏÀÌ°í °¡´Â °æ·Î°¡ ÀÖÀ» °æ¿ì => ¹æ¹®ÇÑ ³ëµå¿Í ÀÎÁ¢ÇÑ ¸ğµç ³ëµå¸¦ °¡Á®¿Â´Ù
+                        //ì‚¬ìš©í•˜ì§€ ì•Šì€ í‹°ì¼“ì´ê³  ê°€ëŠ” ê²½ë¡œê°€ ìˆì„ ê²½ìš° => ë°©ë¬¸í•œ ë…¸ë“œì™€ ì¸ì ‘í•œ ëª¨ë“  ë…¸ë“œë¥¼ ê°€ì ¸ì˜¨ë‹¤
 			if(!visited[i] && tickets[i][0].equals(station)) {
 				visited[i] = true;
-				dfs(visited, tickets[i][1], path, tickets, index+1); //´ÙÀ½ ÀÎµ¦½º ¿ø¼Ò¸¦ ³Ö±â À§ÇØ index+1À¸·Î Àç±ÍÈ£Ãâ
-				visited[i] = false; // ¹æ¹®¿©ºÎ ÇØÁ¦
+				dfs(visited, tickets[i][1], path, tickets, index+1); //ë‹¤ìŒ ì¸ë±ìŠ¤ ì›ì†Œë¥¼ ë„£ê¸° ìœ„í•´ index+1ìœ¼ë¡œ ì¬ê·€í˜¸ì¶œ
+				visited[i] = false; // ë°©ë¬¸ì—¬ë¶€ í•´ì œ
 			}
 		}
 	}

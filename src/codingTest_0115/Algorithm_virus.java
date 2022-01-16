@@ -1,40 +1,69 @@
 package codingTest_0115;
 
-//ÇöÀç ÄÄÇ»ÅÍÀÇ °¹¼ö°¡ ¾Æ´Ï¶ó ¿¬°áµÈ ¼±ÀÇ ¼ö·Î ÃøÁ¤µÇ´Â°ÍÀ¸·Î È®ÀÎ µÊ
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.*;
+
+// ì ‘ê·¼ ë°©ì‹ì„ í‹€ë ¤ì„œ ì»´í“¨í„°ì˜ ê°¯ìˆ˜ê°€ ì•„ë‹ˆë¼ ì—°ê²°ëœ ì„ ì˜ ìˆ˜ë¡œ ì¸¡ì •ë˜ì–´ ì½”ë“œ ì°¸ì¡°
+// ì°¸ê³ 
+// https://heesangstudynote.tistory.com/43
 public class Algorithm_virus {
-	public static void main(String[] args) {
-		int[][] computers = {{1, 2}, {2, 3}, {1, 5}, {5, 2}, {5, 6}, {4, 7}};
-		System.out.println(new Solution().solution(computers));
-	}
+	static int n;	//ì»´í“¨í„° ìˆ˜
+	static int m;	//ì»´í“¨í„° ì—°ê²° ìŒ
+	static List<List<Integer>> graph;
+	static boolean[] visited;
+	static int count;
 	
-	public static class Solution{
-		public int solution(int[][] computers) {
-			int answer = 0;
-			boolean[] check = new boolean[computers.length];
-			
-			for (int i = 0; i < computers.length; i++) {
-				if(check[i] == true) {
-					answer++;
-				}
-				dfs(i, check, computers);
-			}
-			
-			return answer;
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
+		n = Integer.parseInt(br.readLine());
+		m = Integer.parseInt(br.readLine());
+		graph = new LinkedList<>();
+		visited = new boolean[n+1];
+		
+		int a, b;
+		StringTokenizer st;
+		
+		for(int i=0; i<n+1; i++) {
+			List<Integer> list = new LinkedList<>();
+			graph.add(list);
 		}
 		
-		public void dfs(int node, boolean[] check, int[][] computers) //DFS ±íÀÌ ¿ì¼± Å½»ö
-		{
+		
+		for(int i=0; i<m; i++) {
+			st = new StringTokenizer(br.readLine());
+			a = Integer.parseInt(st.nextToken());
+			b = Integer.parseInt(st.nextToken());
 			
-			for (int i = 0; i < computers.length; i++) {
-				for (int j = 0; j < 2; j++) {
-					if (check[i] == false) {
-						if(computers[node][0] == computers[i][j] || computers[node][1] == computers[i][j]) {
-							check[node] = true;
-							dfs(i, check, computers);
+			graph.get(a).add(b);
+			graph.get(b).add(a);
+		}
+		
+		count = 0;
+		dfs(1);
+		
+		bw.write(String.valueOf(count));
+		bw.flush();
+		bw.close();
+		
+	}
+	
+	static void dfs(int start) {
+		visited[start] = true;
 
-						}
-					}
-				}
+		List<Integer> tempList = graph.get(start);
+		
+		for(int i=0; i<tempList.size(); i++) {
+			int temp = tempList.get(i);
+			
+			if(visited[temp] == false) {
+				dfs(temp);
+				count++;
 			}
 		}
 	}

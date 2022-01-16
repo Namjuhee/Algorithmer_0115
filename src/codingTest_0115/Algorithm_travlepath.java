@@ -7,6 +7,8 @@ import java.util.Collections;
 //내가 놓쳤던 부분
 //행선지 중복은 가능하지만 티켓 중복이 생기는걸 고려안함
 //모든 도시를 방문할 수 있으므로 도시를 방문하는 경로를 구하고 알파벳 순서로 정렬
+// 참고
+// https://sang12.co.kr/278/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8-DFSBFS-%EC%97%AC%ED%96%89%EA%B2%BD%EB%A1%9C-JAVA
 
 public class Algorithm_travlepath {
 static ArrayList<String> result = new ArrayList<String>(); //String 타입을 원소로 갖는 List
